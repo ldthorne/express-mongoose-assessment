@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-
+require('./models');
 mongoose.connect('mongodb://localhost/bestDb');
 
 var db = mongoose.connection;

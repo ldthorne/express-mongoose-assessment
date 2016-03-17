@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
-var Item = mongoose.model('Item');
-var User = mongoose.model('User');
-var Cart = mongoose.model('ShoppinCart');
+var Item = require('./db/models/items2');
+var User = require('./db/models/user');
+var Cart = require('./db/models/shoppingCart');
 
 var items = [
   {
@@ -57,6 +57,7 @@ var createdUsers;
 
 Item.create(items)
   .then(function (newItems) {
+    console.log('newItems: ', newItems)
     createdItems = newItems;
     return User.create(users);
   })
