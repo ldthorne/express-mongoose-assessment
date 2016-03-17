@@ -1,18 +1,31 @@
-// '/' home page => list of all products
-// '/item/:id' => specific item
-// '/category/:category' => all products for category
-// 'shoppingCart/:userId' => user's shopping cart
+// It's worth seperating these routes into individual routers for Item, Cart, User
 
-var express = require('express');
-var Router = express.Router();
+var bodyParser = require('body-parser');
+var Router = require('express').Router();
 var models = require('../db/models');
 
 var Item = models.Item;
 var Cart = models.Cart;
 var User = models.User;
 
+Router.use(bodyParser.json());
+Router.use(bodyParser.urlencoded({extended: true}));
+
 Router.get('/', function(req, res, next) {
-  res.send('HELLO!')
+  Item.find()
+  .then(function(items) {
+    res.json(items);
+  })
+})
+
+Router.post('/item', function(req, res, next) {
+  console.log(req.body)
+  Item.create(req.body)
+  .then(function(item) {
+    console.log(item)
+    res.redirect('/item/' + item._id);
+  })
+  .then(null, console.error.bind(console))
 })
 
 Router.get('/item/:id', function(req, res, next) {
@@ -24,7 +37,10 @@ Router.get('/category/:category', function(req, res, next) {
 })
 
 Router.get('/cart/:userId', function(req, res, next) {
-
+  Cart.find().populate('user items')
+  .then(function(populatedCart) {
+    res.json(populatedCart);
+  })
 })
 
 module.exports = Router;
