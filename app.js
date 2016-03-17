@@ -8,3 +8,6 @@ app.listen(3000, function() {
 
 app.use(require('morgan')('dev'));
 app.use(require('./routes'));
+
+// connect to DB
+require('./db/startDb'); 
