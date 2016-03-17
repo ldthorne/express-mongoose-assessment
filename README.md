@@ -1,7 +1,7 @@
 # This is a review session for the express/mongoose assessment
 
 
-## Okay guys, here's what you do:
+Okay guys, here's what you do:
 
 1. `npm install` to get all your packages installed (or `npm i` if you wanna be lazy)
 
@@ -12,7 +12,6 @@
 PS: Deliver mail to your server with [Postman](https://www.getpostman.com/)
 
 Have fun.
-
 Lots of love
 
 - Your fellows.
